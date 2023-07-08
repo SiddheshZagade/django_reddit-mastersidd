@@ -8,4 +8,5 @@ urlpatterns = [
     re_path(r'^logout/$', views.user_logout, name="logout"),
     re_path(r'^user/(?P<username>[0-9a-zA-Z_]*)$', views.user_profile, name="user_profile"),
     re_path(r'^profile/edit/$', views.edit_profile, name="edit_profile"),
+    re_path(r'^submission/(?P<submission_id>[0-9]+)/edit/$', views.edit_submission, name="edit_submission"),
 ]

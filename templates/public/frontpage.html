@@ -2,7 +2,6 @@
 {% load humanize %}
 
 {% block content %}
-
     <table>
         <tbody>
         {% for submission in submissions %}
@@ -30,10 +29,9 @@
 
                     <ul class="buttons">
                         <li><a href="{{ submission.comments_url }}">{{ submission.comment_count }} comments</a></li>
+                        <li><a href="/submission/{{ submission.id }}/edit/">Edit</a></li>  <!-- Add this line -->
                         <li><a href="/submission/{{ submission.id }}/">View Details</a></li>  <!-- Add this line -->
                     </ul>
-
-
                 </td>
             </tr>
         {% endfor %}
