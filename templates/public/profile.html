@@ -8,17 +8,17 @@
                     <div class="col-sm-12">
                         <div class="col-xs-12 col-sm-8">
                             <h2>{% if profile.first_name %}{{ profile.first_name }}{% endif %}
-                                {% if profile.last_name %}{{ profile.last_name }} {% endif %}
+                                {% if profile.last_name %}{{ profile.last_name }}{% endif %}
                                 <small>({{ profile.user.username }})</small>
                             </h2>
 
-                            <p><strong>About: </strong></p>
+                            <p><strong>About:</strong></p>
 
                             <p>
                                 {% if profile.about_html %}
-                                {{ profile.about_html|safe }}
+                                    {{ profile.about_html|safe }}
                                 {% else %}
-                                <p>User has not entered anything here</p>
+                                    <p>User has not entered anything here</p>
                                 {% endif %}
                             </p>
                         </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-xs-12 divider text-center">
                         <div class="col-xs-12 col-sm-4 emphasis">
-                            <h2><strong> {{ profile.comment_karma }} </strong></h2>
+                            <h2><strong>{{ profile.comment_karma }}</strong></h2>
                             <p>Comment karma</p>
                         </div>
                         <div class="col-xs-12 col-sm-4 emphasis">
@@ -68,11 +68,14 @@
                         <div class="col-xs-12 col-sm-4 emphasis">
                             <br>
                             {% if profile.user == user %}
-                                <a type="button" class="btn btn-primary" href="/profile/edit"><span
-                                        class="fa fa-gear"></span> Edit</a>
+                                <a type="button" class="btn btn-primary" href="/profile/edit">
+                                    <span class="fa fa-gear"></span> Edit
+                                </a>
                             {% else %}
-                                <a class="btn btn-success" href="/messages/compose?to={{ profile.user.username }}">
-                                    <span class="fa fa-envelope-o"></span> Message </a>
+                                <a class="btn btn-success"
+                                   href="/messages/compose?to={{ profile.user.username }}">
+                                    <span class="fa fa-envelope-o"></span> Message
+                                </a>
                             {% endif %}
                         </div>
                     </div>
@@ -91,7 +94,12 @@
                             <ul class="list-group">
                                 {% for comment in comments %}
                                     <li class="list-group-item">
-                                        <p>{{ comment.raw_comment }}</p>
+                                        <p>Author: {{ comment.author.user.username }}</p>
+                                        <p>Timestamp: {{ comment.timestamp }}</p>
+                                        <p>Content:</p>
+                                        <div class="comment-content">
+                                            {{ comment.raw_comment }}
+                                        </div>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -102,5 +110,32 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Submissions by {{ profile.user.username }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% if submissions %}
+                            <ul class="list-group">
+                                {% for submission in submissions %}
+                                    <li class="list-group-item">
+                                        <p>Title: <a href="/submission/{{ submission.id }}">{{ submission.title }}</a></p>
+                                        <p>Timestamp: {{ submission.timestamp }}</p>
+                                        <p>Score: {{ submission.score }}</p>
+                                        <p>Comment Count: {{ submission.comment_count }}</p>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No submissions found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 {% endblock %}
