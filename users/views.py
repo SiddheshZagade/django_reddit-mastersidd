@@ -9,6 +9,10 @@ from reddit.forms import UserForm, ProfileForm
 from reddit.utils.helpers import post_only
 from users.models import RedditUser
 from reddit.models import Comment
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from reddit.models import Submission
+from reddit.forms import SubmissionForm
 
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
