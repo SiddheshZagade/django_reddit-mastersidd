@@ -119,3 +119,22 @@ def register(request):
             return redirect('frontpage')
 
     return render(request, 'public/register.html', {'form': user_form})
+
+@login_required
+def edit_submission(request, submission_id):
+    submission = get_object_or_404(Submission, id=submission_id)
+
+    if request.method == 'POST':
+        form = SubmissionForm(request.POST, instance=submission)
+        if form.is_valid():
+            form.save()
+            return redirect('submission_detail', submission_id=submission.id)
+    else:
+        form = SubmissionForm(instance=submission)
+
+    context = {
+        'form': form,
+        'submission': submission,
+    }
+
+    return render(request, 'public/edit_submission.html', context)
