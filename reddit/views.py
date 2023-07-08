@@ -256,3 +256,17 @@ def submit(request):
             return redirect('/comments/{}'.format(submission.id))
 
     return render(request, 'public/submit.html', {'form': submission_form})
+
+    return render(request, 'public/submit.html', {'form': submission_form})
+def submission_detail(request, submission_id):
+    """
+    Retrieves and displays the details of a submission.
+    """
+    submission = get_object_or_404(Submission, id=submission_id)
+    comments = Comment.objects.filter(submission=submission).select_related('author__user')
+    context = {
+        'submission': submission,
+        'url': submission.url,
+        'comments': comments,
+    }
+    return render(request, 'public/submission_detail.html', context)

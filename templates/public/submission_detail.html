@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="submission-detail">
+        <h2>{{ submission.title }}</h2>
+        <p>Submitted by: <a href="/user/{{ submission.author_name }}">{{ submission.author_name }}</a></p>
+        <p>Timestamp: {{ submission.timestamp }}</p>
+        <p>Score: {{ submission.score }}</p>
+        <p>Comment Count: {{ submission.comment_count }}</p>
+        <p>Content:</p>
+        <div class="submission-content">
+            {{ submission.content }}
+        </div>
+        <p>URL: <a href="{{ submission.url }}">{{ submission.url }}</a></p>
+    </div>
+
+    <div class="comments-section">
+        <h3>Comments</h3>
+        {% for comment in comments %}
+            <div class="comment">
+                <p>Author: {{ comment.author.user.username }}</p>
+                <p>Timestamp: {{ comment.timestamp }}</p>
+                <p>Content: {{ comment.raw_comment }}</p>
+            </div>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

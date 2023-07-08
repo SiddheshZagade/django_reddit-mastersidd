@@ -23,13 +23,14 @@
                     </div>
                 </td>
                 <td class="info-container">
-                    <a class="thread-title" href="{{ submission.linked_url }}">{{ submission.title }}</a>
+                    <a class="thread-title" href="/submission/{{ submission.id }}/">{{ submission.title }}</a>
                     <br>
                     <h6 class="thread-info">submitted {{ submission.timestamp|naturaltime }} by <a
                             href="/user/{{ submission.author_name }}">{{ submission.author_name }}</a></h6>
 
                     <ul class="buttons">
                         <li><a href="{{ submission.comments_url }}">{{ submission.comment_count }} comments</a></li>
+                        <li><a href="/submission/{{ submission.id }}/">View Details</a></li>  <!-- Add this line -->
                     </ul>
 
 
