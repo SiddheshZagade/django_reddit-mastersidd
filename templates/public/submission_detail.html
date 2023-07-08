@@ -13,6 +13,11 @@
             {{ submission.content }}
         </div>
         <p>URL: <a href="{{ submission.url }}">{{ submission.url }}</a></p>
+        <p>Text:
+        <div class="submission-text">
+            <h2>{{ submission.text }}</h2>
+        </div>
+    </p>
     </div>
 
     <div class="comments-section">
@@ -21,7 +26,10 @@
             <div class="comment">
                 <p>Author: {{ comment.author.user.username }}</p>
                 <p>Timestamp: {{ comment.timestamp }}</p>
-                <p>Content: {{ comment.raw_comment }}</p>
+                <p>Content:</p>
+                <div class="comment-content">
+                    {{ comment.raw_comment }}
+                </div>
             </div>
         {% empty %}
             <p>No comments yet.</p>
