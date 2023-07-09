@@ -27,11 +27,13 @@
                     <h6 class="thread-info">submitted {{ submission.timestamp|naturaltime }} by <a
                             href="/user/{{ submission.author_name }}">{{ submission.author_name }}</a></h6>
 
-                    <ul class="buttons">
-                        <li><a href="{{ submission.comments_url }}">{{ submission.comment_count }} comments</a></li>
-                        <li><a href="/submission/{{ submission.id }}/edit/">Edit</a></li>  <!-- Add this line -->
-                        <li><a href="/submission/{{ submission.id }}/">View Details</a></li>  <!-- Add this line -->
-                    </ul>
+                            <ul class="buttons">
+                                <li><a href="{{ submission.comments_url }}">{{ submission.comment_count }} comments</a></li>
+                                {% if submission.author.user == user %}
+                                    <li><a href="/submission/{{ submission.id }}/edit/">Edit</a></li>
+                                {% endif %}
+                                <li><a href="/submission/{{ submission.id }}/">View Details</a></li>
+                            </ul>
                 </td>
             </tr>
         {% endfor %}
